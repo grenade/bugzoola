@@ -1,0 +1,15 @@
+<div class="panel" ng-class="{ 'panel-danger': bug.severity == 'critical', 'panel-info': bug.severity != 'critical' }">
+  <div class="panel-heading">
+    <a href="" title="{{bug.summary}}">
+      <span ng-show="bug.is_open">{{bug.id}}</span>
+      <s ng-hide="bug.is_open">{{bug.id}}</s>
+    </a>
+    <i class="glyphicon pull-right" ng-click="bug.hidden=!bug.hidden" ng-class="{ 'glyphicon-minus-sign': !bug.hidden, 'glyphicon-plus-sign': bug.hidden }"></i>
+  </div>
+  <div class="panel-body" ng-hide="bug.hidden">
+    {{bug.summary}}
+    <a href="" ng-repeat="tag in bug.tags">
+      <span class="label label-primary">{{tag}}</span>
+    </a>
+  </div>
+</div>

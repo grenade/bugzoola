@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{title}}
+    <i class="glyphicon pull-right" ng-click="this.hidden=!this.hidden;setVisibility(title,this.hidden)" ng-class="{ 'glyphicon-minus-sign': !this.hidden, 'glyphicon-plus-sign': this.hidden }"></i>
+  </div>
+  <div class="panel-body">
+    <bug-panel bug="bug" ng-repeat="bug in bugs"></bug-panel>
+  </div>
+</div>
