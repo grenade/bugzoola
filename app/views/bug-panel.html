@@ -4,6 +4,7 @@
       <span ng-show="bug.is_open">{{bug.id}}</span>
       <s ng-hide="bug.is_open">{{bug.id}}</s>
     </a>
+    <sup>({{bug.status.toLowerCase()}})</sup>
     <i class="glyphicon pull-right" ng-click="bug.hidden=!bug.hidden" ng-class="{ 'glyphicon-minus-sign': !bug.hidden, 'glyphicon-plus-sign': bug.hidden }"></i>
   </div>
   <div class="panel-body" ng-hide="bug.hidden">

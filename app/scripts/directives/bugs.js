@@ -9,7 +9,7 @@
 angular.module('bugzoollaApp')
   .directive('bugsPanel', function () {
     return {
-      templateUrl: 'views/bugs.html',
+      templateUrl: 'views/bugs-panel.html',
       restrict: 'E',
       scope:{
           title: "@",
