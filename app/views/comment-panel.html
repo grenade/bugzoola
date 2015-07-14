@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a ng-href="">
+      <gravatar data-email="comment.creator" data-size="20" data-default-url="identicon" />
+      {{comment.creator}}
+    </a>
+    {{comment.time}}
+    <i class="glyphicon pull-right" ng-click="comment.hidden=!comment.hidden" ng-class="{ 'glyphicon-minus-sign': !comment.hidden, 'glyphicon-plus-sign': comment.hidden }"></i>
+    <span class="pull-right" style="margin-right: 10px;">
+      <span ng-show="index==0">Description</span>
+      <span ng-show="index>0">Comment {{index}}</span>
+    </span>
+  </div>
+  <div class="panel-body" ng-hide="comment.hidden">
+    <pre style="background-color: white">{{comment.text}}</pre>
+  </div>
+</div>

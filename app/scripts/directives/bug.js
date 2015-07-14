@@ -12,10 +12,14 @@ angular.module('bugzoollaApp')
       templateUrl: 'views/bug-panel.html',
       restrict: 'E',
       scope:{
-          bug: "="
+        verbose: "@",
+        bug: "="
       },
       link: function postLink(scope, element, attrs) {
-        //element.text('this is the bug directive');
+        var verbose = attrs.verbose;
+        if((verbose === null) || (verbose === undefined) || (verbose === '')) {
+          verbose = false;
+        }
       }
     };
   });

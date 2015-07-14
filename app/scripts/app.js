@@ -29,6 +29,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/bug/:id', {
+        templateUrl: 'views/bug.html',
+        controller: 'BugCtrl',
+        controllerAs: 'bug'
+      })
       .otherwise({
         redirectTo: '/'
       });
