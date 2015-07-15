@@ -24,15 +24,15 @@ angular
         controller: 'DashCtrl',
         controllerAs: 'dash'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
       .when('/bug/:id', {
         templateUrl: 'views/bug.html',
         controller: 'BugCtrl',
         controllerAs: 'bug'
+      })
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl',
+        controllerAs: 'about'
       })
       .otherwise({
         redirectTo: '/'

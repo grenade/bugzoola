@@ -37,9 +37,13 @@
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
+            <ul class="nav navbar-nav" ng-controller="NavCtrl">
+              <li ng-class="{ active: !isActive('/about') }">
+                <a href="#/">heads up display</a>
+              </li>
+              <li ng-class="{ active: isActive('/about') }">
+                <a ng-href="#/about">about</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -52,7 +56,7 @@
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p><span class="glyphicon glyphicon-heart"></span> from a Mozillian</p>
       </div>
     </div>
 
@@ -85,6 +89,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/resources/bug.js"></script>
+        <script src="scripts/controllers/nav.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/dash.js"></script>
         <script src="scripts/controllers/bug.js"></script>
