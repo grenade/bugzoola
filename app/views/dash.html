@@ -33,12 +33,29 @@
 </div>
 
 <div class="row text-center" ng-show="loading_status">
-  <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
-  <br />
-  <span>{{loading_status}}</span>
+  <div>{{loading_status}}</div>
+  <div class="progress" ng-show="count">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{((processed/count) * 100).toFixed(2)}}" aria-valuemin="0" aria-valuemax="100" style="width: {{((processed/count) * 100).toFixed(2)}}%;">
+      <span class="sr-only">{{((processed/count) * 100).toFixed(2)}}% Complete</span>
+    </div>
+  </div>
+  <div ng-show="!count">
+    <i class="glyphicon glyphicon-refresh glyphicon-spin"></i>
+  </div>
 </div>
 
-<div class="row" ng-hide="loading">
+<div class="row text-center">
+  <h4>Bugs
+    <span ng-show="search.reporter">reported by <em>{{search.reporter}}</em></span>
+    <span ng-show="search.assignee">assigned to <em>{{search.assignee}}</em></span>
+    <span ng-show="search.component">in component <em>{{search.component}}</em></span>
+    <span ng-show="search.whiteboard">with whiteboard tag <em>{{search.whiteboard}}</em></span>
+    <span ng-show="search.created_after">created after <em>{{search.created_after.toLocaleDateString()}}</em></span>
+    <span ng-show="search.modified_after">modified after <em>{{search.modified_after.toLocaleDateString()}}</em></span>
+  </h4>
+</div>
+
+<div class="row">
   <div class="col-md-3" ng-repeat="(title, list) in bugs">
     <bugs-panel title="{{title}}" bugs="list"></bugs-panel>
   </div>

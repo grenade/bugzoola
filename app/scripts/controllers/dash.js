@@ -55,6 +55,7 @@ angular.module('bugzoollaApp')
       $scope.search.advanced = $scope.search.reporter || $scope.search.component || $scope.search.whiteboard || $scope.search.created_after;
       if(bugSearch.$valid) {
         $scope.setSearchCookies();
+        $scope.count = 0;
         $scope.loading_status = 'talking to bugzilla...';
         BugFactory.query(
           {
@@ -72,6 +73,8 @@ angular.module('bugzoollaApp')
               has_patches: [],
               resolved: []
             };
+            $scope.count = data.bugs.length;
+            $scope.processed = 0;
             $scope.loading_status = 'sorting bugs...';
             data.bugs.forEach(function(bug){
               if (bug.whiteboard){
@@ -81,18 +84,23 @@ angular.module('bugzoollaApp')
               }
               bug.hidden = true;
               if (!bug.is_open) {
+                $scope.processed ++;
                 $scope.bugs.resolved.push(bug);
               } else {
                 if (!bug.is_open) {
+                  $scope.processed ++;
                   $scope.bugs.resolved.push(bug);
                 } else {
                   CommentFactory.get({ bug_id: bug.id }, function(bug_data) {
                     if (bug_data.bugs[bug.id].comments.filter(function(c){ return c.attachment_id }).length) {
+                      $scope.processed ++;
                       $scope.bugs.has_patches.push(bug);
                     } else {
                       if (bug_data.bugs[bug.id].comments.length > 1) {
+                        $scope.processed ++;
                         $scope.bugs.has_comments.push(bug);
                       } else {
+                        $scope.processed ++;
                         $scope.bugs.backlog.push(bug);
                       }
                     }
@@ -105,11 +113,15 @@ angular.module('bugzoollaApp')
                 bug.hidden = hide;
               });
             };
-            $scope.loading_status = false;
           }
         );
       }
     }
+    $scope.$watch('processed', function(processed) {
+      if(processed === $scope.count) {
+        $scope.loading_status = false;
+      }
+    });
     $scope.$watch('bugSearch', function(bugSearch) {
       if(bugSearch) {
         $scope.refresh(bugSearch);
