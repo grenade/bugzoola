@@ -1,7 +1,7 @@
 <div class="panel" ng-class="{ 'panel-danger': bug.severity == 'critical', 'panel-info': bug.severity != 'critical' }">
   <div class="panel-heading">
     <a ng-href="#/bug/{{bug.id}}" title="{{bug.creator_detail.real_name}}: {{bug.summary}}">
-      <gravatar data-email="bug.creator" data-size="20" data-default="identicon" ng-hide="verbose" />
+      <gravatar data-email="bug.creator" data-size="20" data-default="identicon" ng-hide="verbose"></gravatar>
       <span ng-show="bug.is_open">{{bug.id}}</span>
       <s ng-hide="bug.is_open">{{bug.id}}</s>
     </a>
