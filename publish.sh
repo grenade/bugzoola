@@ -2,7 +2,7 @@
 
 git clone "https://${GH_TOKEN}@${GH_REF}" pages_repo
 rm -rf pages_repo/bugzoolla
-cp dist pages_repo/bugzoolla
+cp -r dist pages_repo/bugzoolla
 cd pages_repo
 git config user.name "${GIT_NAME}"
 git config user.email "${GIT_EMAIL}"
