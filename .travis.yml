@@ -1,5 +1,7 @@
 sudo: false
 language: node_js
+before_install:
+  - gem install sass compass
 node_js:
   - 'iojs'
   - '0.12'
@@ -7,3 +9,4 @@ node_js:
 before_script:
   - 'npm install -g bower grunt-cli'
   - 'bower install'
+  - 'grunt build'
