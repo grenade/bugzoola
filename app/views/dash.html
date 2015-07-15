@@ -1,18 +1,42 @@
 <div class="row">
   <form name="bugSearch" ng-submit="refresh(bugSearch)">
     <div class="form-group col-md-4">
-      <input type="email" class="form-control" placeholder="assignee" ng-model="search.assignee" required />
+      <label for="assignee" ng-show="search.advanced">assigned to:</label>
+      <input type="email" class="form-control" placeholder="assignee" ng-model="search.assignee" />
+    </div>
+    <div class="form-group col-md-4" ng-show="search.advanced">
+      <label for="reporter" ng-show="search.advanced">reported by:</label>
+      <input type="email" class="form-control" placeholder="reporter" ng-model="search.reporter" />
     </div>
     <div class="form-group col-md-4">
-      <input type="date" class="form-control" ng-model="search.modified_after" required />
+      <label for="modified_after" ng-show="search.advanced">updated after:</label>
+      <input type="date" class="form-control" ng-model="search.modified_after" />
     </div>
-    <div class="col-md-4">
-      <input type="submit" class="btn btn-default" value="Search Bugs" />
+    <div class="form-group col-md-4" ng-show="search.advanced">
+      <label for="component" ng-show="search.advanced">component:</label>
+      <input type="text" class="form-control" placeholder="component" ng-model="search.component" />
     </div>
-
+    <div class="form-group col-md-4" ng-show="search.advanced">
+      <label for="whiteboard" ng-show="search.advanced">whiteboard:</label>
+      <input type="text" class="form-control" placeholder="whiteboard" ng-model="search.whiteboard" />
+    </div>
+    <div class="form-group col-md-4" ng-show="search.advanced">
+      <label for="created_after" ng-show="search.advanced">created after:</label>
+      <input type="date" class="form-control" ng-model="search.created_after" />
+    </div>
+    <div class="form-group col-md-4 pull-right">
+      <div ng-show="search.advanced">&nbsp;</div>
+      <input type="submit" class="btn btn-primary" value="search bugzilla" />
+      <i class="glyphicon pull-right" ng-click="search.advanced=!search.advanced" ng-class="{ 'glyphicon-minus-sign': search.advanced, 'glyphicon-plus-sign': !search.advanced }"></i>
+    </div>
   </form>
 </div>
-<div class="row">
+
+<div class="row text-center" ng-show="loading">
+  <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+</div>
+
+<div class="row" ng-hide="loading">
   <div class="col-md-4" ng-repeat="(title, list) in bugs">
     <bugs-panel title="{{title}}" bugs="list"></bugs-panel>
   </div>

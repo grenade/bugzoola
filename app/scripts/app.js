@@ -24,6 +24,11 @@ angular
         controller: 'DashCtrl',
         controllerAs: 'dash'
       })
+      .when('/search', {
+        templateUrl: 'views/dash.html',
+        controller: 'DashCtrl',
+        controllerAs: 'dash'
+      })
       .when('/bug/:id', {
         templateUrl: 'views/bug.html',
         controller: 'BugCtrl',

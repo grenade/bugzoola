@@ -6,6 +6,7 @@
       <s ng-hide="bug.is_open">{{bug.id}}</s>
     </a>
     <sup>{{bug.status.toLowerCase()}}</sup>
+    <sub ng-show="verbose"><a href="http://bugzil.la/{{bug.id}}">bugzilla</a></sub>
     <i class="glyphicon pull-right" ng-click="bug.hidden=!bug.hidden" ng-class="{ 'glyphicon-minus-sign': !bug.hidden, 'glyphicon-plus-sign': bug.hidden }"></i>
   </div>
   <div class="panel-body" ng-hide="bug.hidden">
@@ -14,6 +15,5 @@
       <span class="label label-primary">{{tag}}</span>
     </a>
     <comment-panel comment="comment" index="{{$index}}" ng-repeat="comment in bug.comments"></comment-panel>
-    <pre>{{bug | json}}</pre>
   </div>
 </div>
