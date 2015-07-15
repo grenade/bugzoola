@@ -8,8 +8,8 @@
  * Controller of the bugzoollaApp
  */
 angular.module('bugzoollaApp')
-  .controller('DashCtrl', function ($scope, $cookies, $routeParams, $location, BugFactory) {
-    $scope.loading = false;
+  .controller('DashCtrl', function ($scope, $cookies, $routeParams, $location, BugFactory, CommentFactory) {
+    $scope.loading_status = 'thinking...';
     if ($routeParams.assignee
       || $routeParams.reporter
       || $routeParams.component
@@ -55,7 +55,7 @@ angular.module('bugzoollaApp')
       $scope.search.advanced = $scope.search.reporter || $scope.search.component || $scope.search.whiteboard || $scope.search.created_after;
       if(bugSearch.$valid) {
         $scope.setSearchCookies();
-        $scope.loading = true;
+        $scope.loading_status = 'talking to bugzilla...';
         BugFactory.query(
           {
             assigned_to: $scope.search.assignee,
@@ -66,27 +66,46 @@ angular.module('bugzoollaApp')
             whiteboard: $scope.search.whiteboard
           },
           function(data) {
-            var bugs = data.bugs;
-            bugs.forEach(function(bug){
+            $scope.bugs = {
+              backlog: [],
+              has_comments: [],
+              has_patches: [],
+              resolved: []
+            };
+            $scope.loading_status = 'sorting bugs...';
+            data.bugs.forEach(function(bug){
               if (bug.whiteboard){
                 bug.tags = bug.whiteboard
                   .split(/[\[\],]+/)
                   .filter(function(n){ return n != undefined && n });
               }
-              //bug.hidden = !bug.is_open;
               bug.hidden = true;
+              if (!bug.is_open) {
+                $scope.bugs.resolved.push(bug);
+              } else {
+                if (!bug.is_open) {
+                  $scope.bugs.resolved.push(bug);
+                } else {
+                  CommentFactory.get({ bug_id: bug.id }, function(bug_data) {
+                    if (bug_data.bugs[bug.id].comments.filter(function(c){ return c.attachment_id }).length) {
+                      $scope.bugs.has_patches.push(bug);
+                    } else {
+                      if (bug_data.bugs[bug.id].comments.length > 1) {
+                        $scope.bugs.has_comments.push(bug);
+                      } else {
+                        $scope.bugs.backlog.push(bug);
+                      }
+                    }
+                  });
+                }
+              }
             });
-            $scope.bugs = {
-              backlog: bugs.filter(function(bug){ return bug.is_open && bug.status != 'ASSIGNED' }),
-              assigned: bugs.filter(function(bug){ return bug.is_open && bug.status == 'ASSIGNED' }),
-              resolved: bugs.filter(function(bug){ return !bug.is_open })
-            };
             $scope.setVisibility = function(key, hide) {
               $scope.bugs[key].forEach(function(bug){
                 bug.hidden = hide;
               });
             };
-            $scope.loading = false;
+            $scope.loading_status = false;
           }
         );
       }

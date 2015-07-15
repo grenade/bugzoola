@@ -10,7 +10,7 @@
     </div>
     <div class="form-group col-md-4">
       <label for="modified_after" ng-show="search.advanced">modified after:</label>
-      <input type="date" class="form-control" ng-model="search.modified_after" />
+      <input type="date" class="form-control" ng-model="search.modified_after" ng-change="refresh(bugSearch)" />
     </div>
     <div class="form-group col-md-4" ng-show="search.advanced">
       <label for="component" ng-show="search.advanced">component:</label>
@@ -22,7 +22,7 @@
     </div>
     <div class="form-group col-md-4" ng-show="search.advanced">
       <label for="created_after" ng-show="search.advanced">created after:</label>
-      <input type="date" class="form-control" ng-model="search.created_after" />
+      <input type="date" class="form-control" ng-model="search.created_after" ng-change="refresh(bugSearch)" />
     </div>
     <div class="form-group col-md-4 pull-right">
       <div ng-show="search.advanced">&nbsp;</div>
@@ -32,12 +32,14 @@
   </form>
 </div>
 
-<div class="row text-center" ng-show="loading">
+<div class="row text-center" ng-show="loading_status">
   <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+  <br />
+  <span>{{loading_status}}</span>
 </div>
 
 <div class="row" ng-hide="loading">
-  <div class="col-md-4" ng-repeat="(title, list) in bugs">
+  <div class="col-md-3" ng-repeat="(title, list) in bugs">
     <bugs-panel title="{{title}}" bugs="list"></bugs-panel>
   </div>
 </div>
