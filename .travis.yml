@@ -13,8 +13,8 @@ script:
 - bash ./publish.sh
 env:
   global:
-  - GIT_COMMIT_HASH: "$(git log -1 --format=%h)"
-  - GIT_REMOTE: "${$(git config --get remote.origin.url)/git:/https:}"
+  - GIT_COMMIT_HASH: $(`git log -1 --format=%h`)
+  - GIT_REMOTE: ${$(`git config --get remote.origin.url`)/git:/https:}
   - GIT_NAME: Travis-CI
   - GIT_EMAIL: rthijssen@gmail.com
   - GH_REF: github.com/grenade/grenade.github.io.git
