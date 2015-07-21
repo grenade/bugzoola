@@ -16,7 +16,7 @@ env:
   global:
   - GIT_NAME: Travis-CI
   - GIT_EMAIL: rthijssen@gmail.com
-  - GIT_SUBDIR: bugzoolla
+  - GH_PAGES_SUBDIR: bugzoolla
   - GH_REF: github.com/grenade/grenade.github.io.git
   - GH_PAGES_BRANCH: master
   - secure: HVSwPUz+bvc0ER8oqGtJKIF3XGxQQEkcOCBui3gBlucs6uSmlCLhuWyntzRqgeJEPGHOel2uYCiXtaWLplFoh1trKuuUnrFjhE/eJZpMaCUOcPCyNef9IEYyjViC0TmiYy1AR7fQ1O6C1miysdXMD3alV3JNIE/3v9/Nc1fAAKULVCswR9DuPvjCyxah9BLgO87ScflP50wRV6+cp/FKJWTx+iwsUpMMyqna7tPTqi2icPutvYKCjkGUR4TKU9GmA8dK1n2ZBCs9Vmf2dY6hGDU4AjNypAmH/nKgZ8EFGNiUluWlDOdt35UlayIPmkFEXgI2Fb2fw8DlIlt8kPdF891wX2Xi7NluucPsjYpjGaaD/PQ6kHfT8WHb/C2QtV5VoFR5bhLDgO0cWfUB3uJP55ZgSWM8HAfoSt1yi8wuO2CjLOkOBtDojryqlDyye3gg3kMvNnzPf2cKl9P3lb4/zVJRCJ7ExE3XkaK5tRIUBRMWFj54QLilXrnRAYXNjeTMzbbmdNXH6KNVOR8qhEhzNBRkb4m2nDim9p+zYrYtDn58zIO6BZaIHLyRQcJxMfSV14uRdSiuyESweM5X1FuVn6PZJrbeWzwOpqYmr5HxPO0wG3wKGzHTsWH3AWr2Ctxep7qr6ld6GUSdbRCbPUDbRNYUaVBFyH74HW6dNBNkNxo=
