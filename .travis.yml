@@ -14,7 +14,7 @@ script:
 env:
   global:
   - GIT_NAME: Travis-CI
-  - GIT_EMAIL: rthijssen@gmail.com
+  - GIT_EMAIL: builds@travis-ci.org
   - GH_REF: github.com/grenade/grenade.github.io.git
   - GH_PAGES_BRANCH: master
   - GH_PAGES_SUBDIR: bugzoolla
