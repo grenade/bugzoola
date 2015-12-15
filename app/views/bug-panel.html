@@ -37,7 +37,19 @@
     </div>
     <hr ng-show="verbose && (bug.depended_on_bugs.length || bug.blocked_bugs.length)" />
     <a href="" ng-repeat="tag in bug.tags">
-      <span class="label label-primary">{{tag}}</span>
+      <span class="label label-primary" style="margin-left: 4px;">
+        <i class="fa"
+           ng-class="{
+             'fa-amazon': tag === 'aws',
+             'fa-apple': tag === 'osx',
+             'fa-windows': tag === 'windows'
+           }"
+           ng-show="['aws', 'windows'].indexOf(tag) > -1">
+        </i>
+        <span>
+          {{tag}}
+        </span>
+      </span>
     </a>
     <comment-panel comment="comment" index="{{$index}}" ng-repeat="comment in bug.comments"></comment-panel>
   </div>
