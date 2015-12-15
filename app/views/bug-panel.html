@@ -11,9 +11,35 @@
   </div>
   <div class="panel-body" ng-hide="bug.hidden">
     {{bug.summary}}
+    <hr ng-show="verbose && bug.depended_on_bugs.length" />
+    <div ng-show="verbose && bug.depended_on_bugs.length">
+      <span>depends on:</span>
+      <ul>
+        <li ng-repeat="depended_on_bug in bug.depends_on_bugs">
+          <a ng-href="#/bug/{{depended_on_bug.id}}" title="{{depended_on_bug.creator_detail.real_name}}: {{depended_on_bug.summary}}">
+            {{depended_on_bug.id}}
+          </a>
+          {{depended_on_bug.summary}}
+        </li>
+      </ul>
+    </div>
+    <hr ng-show="verbose && bug.blocked_bugs.length" />
+    <div ng-show="verbose && bug.blocked_bugs.length">
+      <span>blocks:</span>
+      <ul>
+        <li ng-repeat="blocked_bug in bug.blocked_bugs">
+          <a ng-href="#/bug/{{blocked_bug.id}}" title="{{blocked_bug.creator_detail.real_name}}: {{blocked_bug.summary}}">
+            {{blocked_bug.id}}
+          </a>
+          {{blocked_bug.summary}}
+        </li>
+      </ul>
+    </div>
+    <hr ng-show="verbose && (bug.depended_on_bugs.length || bug.blocked_bugs.length)" />
     <a href="" ng-repeat="tag in bug.tags">
       <span class="label label-primary">{{tag}}</span>
     </a>
     <comment-panel comment="comment" index="{{$index}}" ng-repeat="comment in bug.comments"></comment-panel>
   </div>
 </div>
+<pre>{{bug | json}}</pre>

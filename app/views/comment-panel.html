@@ -5,13 +5,13 @@
       {{comment.creator}}
     </a>
     {{comment.time}}
-    <i class="glyphicon pull-right" ng-click="comment.hidden=!comment.hidden" ng-class="{ 'glyphicon-minus-sign': !comment.hidden, 'glyphicon-plus-sign': comment.hidden }"></i>
+    <i class="glyphicon pull-right" ng-click="comment.hidden=!comment.hidden" ng-class="{ 'glyphicon-minus-sign': !comment.hidden, 'glyphicon-plus-sign': comment.hidden }" ng-hide="!comment.text"></i>
     <span class="pull-right" style="margin-right: 10px;">
-      <span ng-show="index==0">Description</span>
-      <span ng-show="index>0">Comment {{index}}</span>
+      <span ng-show="index==0 && comment.text">Description</span>
+      <span ng-show="index>0 && comment.text">Comment {{index}}</span>
     </span>
   </div>
-  <div class="panel-body" ng-hide="comment.hidden">
+  <div class="panel-body" ng-hide="comment.hidden || !comment.text">
     <pre style="background-color: white">{{comment.text}}</pre>
   </div>
 </div>
